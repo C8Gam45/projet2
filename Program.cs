@@ -12,6 +12,47 @@ class Compte
         Nom = nom;
         Solde = solde;
     }
+
+    public void Crediter(decimal montant)
+    {
+        if (montant <= 0)
+        {
+            Console.WriteLine("Erreur : Le montant à créditer doit être positif.");
+            return;
+        }
+        Solde += montant;
+    }
+
+    public void Debiter(decimal montant)
+    {
+        if (montant <= 0)
+        {
+            Console.WriteLine("Erreur : Le montant à débiter doit être positif.");
+            return;
+        }
+        if (Solde - montant < 0)
+        {
+            Console.WriteLine("Erreur : Solde insuffisant pour débiter ce montant.");
+            return;
+        }
+        Solde -= montant;
+    }
+
+    public void Transferer(Compte destinataire, decimal montant)
+    {
+        if (montant <= 0)
+        {
+            Console.WriteLine("Erreur : Le montant à transférer doit être positif.");
+            return;
+        }
+        if (Solde - montant < 0)
+        {
+            Console.WriteLine("Erreur : Solde insuffisant pour transférer ce montant.");
+            return;
+        }
+        Solde -= montant;
+        destinataire.Solde += montant;
+    }
 }
 
 class Program
